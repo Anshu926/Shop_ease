@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+
+  
+
+  <div class="login-container">
+    <h1>Login</h1>
+
+    <!-- Flash messages container -->
+    <div id="flash-messages">
+      <% if (successMessage.length > 0) { %>
+        <div class="flash-message success set">
+          <%= successMessage %> 
+        </div>
+      <% } %>
+      <% if (errorMessage.length > 0) { %>
+        <div class="flash-message error set">
+          <%= errorMessage %>
+        </div>
+      <% } %>
+    </div>
+    <br>
+    <form id="login-form" action="/login" method="POST" class="login-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="submit-btn">Login</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        const flashMessages = document.getElementById("flash-messages");
+        // Display message only if login fails
+        if (!result.success) {
+          flashMessages.innerHTML = `<div class="flash-message error">${result.message}</div>`;
+        } else {
+          // Redirect to /home if login is successful
+          window.location.href = "/home";
+        }
+      })
+      .catch(error => console.error("Error:", error));
+    });
+  </script>
+</body>
+</html>

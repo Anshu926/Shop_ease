@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Product</title>
+  <link rel="stylesheet" href="./create.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1 class="title">Create New Product</h1>
+      <!-- Form to create a new product -->
+      <form action="/products" method="POST">
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter Product Name" />
+        </div>
+        <div class="form-group">
+          <label for="price">Price (₹)</label>
+          <input type="number" id="price" name="price" required placeholder="Enter Price" />
+        </div>
+        <div class="form-group">
+          <label for="image">Product Image URL</label>
+          <input type="url" id="image" name="image" required placeholder="Enter Image URL (Optional)" />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Create Product</button>
+        </div>
+      </form>
+      
+      
+
+      <!-- Footer with a link to the home page -->
+      <div class="footer">
+        <a href="/home" class="back-link">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

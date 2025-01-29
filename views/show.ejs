@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Product</title>
+  <link rel="stylesheet" href="/show.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <% if (successMessage.length > 0) { %>
+    <div class="flash-message success">
+      <%= successMessage %>
+    </div>
+  <% } %>   
+  
+  <div class="product_card">
+    <img src="<%= products.image %>" alt="<%= products.name %>" class="products-image">
+    <h1 class="products-name"><%= products.name %></h1>
+    <p class="products-price">₹<%= products.price %></p>
+
+    <!-- Display the owner's username -->
+    <p class="owner">Owner: <%= products.owner.username %></p>
+
+    <% if (isOwner) { %>
+      <!-- Edit and Delete Buttons -->
+      <div class="button_container">
+        <form action="/edit/<%= products._id %>" method="GET" class="edit_form">
+          <button type="submit" class="edit_btn">
+            <i class="fas fa-edit"></i> Update
+          </button>
+        </form>
+        <form action="/delete/<%= products._id %>?_method=DELETE" method="POST" class="delete_form">
+          <button type="submit" class="delete_btn">
+            <i class="fas fa-trash-alt"></i> Delete
+          </button>
+        </form>
+      </div>
+    <% } %>
+    <br>
+    <a href="/home">Back to Home</a>
+  </div>
+</body>
+</html>

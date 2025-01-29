@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Homepage</title>
+  <link rel="stylesheet" href="./home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+  
+.flash-message {
+  height: 7vh;
+  width: 50vw;
+  padding: 1em;
+  background-color: #4caf50; /* Green for success message */
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 10px; /* Adjust this to position the message vertically */
+  left: 50%;
+  transform: translateX(-50%); /* This will center it horizontally */
+  z-index: 9;
+}
+
+
+.flash-message.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.flash-message.error {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Optional: add fade-out effect */
+.flash-message {
+  animation: fadeOut 5s ease forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.flash-message {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 7rem !important;
+  z-index: 9;
+  border: 2px solid green;
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border: 2px solid green;
+  border-radius: 2rem;
+}
+
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border: 2px solid red;
+  border-radius: 2rem;
+}
+
+</style>
+<body>
+  <% if (successMessage.length > 0) { %>
+    <div class="flash-message success">
+      <%= successMessage %>
+    </div>
+  <% } %>  
+  <% if (errorMessage.length > 0) { %>
+    <div class="flash-message error">
+      <%= errorMessage %>
+    </div>
+  <% } %>
+    
+  <!-- Header -->
+  <header class="header">
+    <h1 class="logo">ShopEase</h1>
+    
+    <nav class="nav">
+      <!-- Add Sign Up Button -->
+      <% if (!isAuthenticated) { %>
+        <form action="/signup" method="get" style="display: inline;">
+          <button class="btn signup-btn">Sign Up</button>
+        </form>
+      <% } %>
+
+      <!-- Log In Button -->
+      <% if (!isAuthenticated) { %>
+        <form action="/login" method="get" style="display: inline;">
+          <button class="btn login-btn">Log In</button>
+        </form>
+      <% } %>
+
+      <!-- Log Out Button -->
+      <% if (isAuthenticated) { %>
+        <form action="/logout" method="post" style="display: inline;">
+          <button class="btn logout-btn">Log Out</button>
+        </form>
+      <% } %>
+
+      <!-- Add Items Button -->
+      <form action="/create" method="get" style="display: inline; background-color: transparent;">
+        <button class="btn add"><i class="fa-solid fa-plus"></i></button>
+      </form>
+    </nav>
+  </header>
+ <% if (Products.length == 0) { %>
+    <div class="none" style="background-color: lightblue; color: black; padding: 2rem; width: 80vw; height: 10ch; margin: auto ; text-align: center;">
+            No item is arrded !
+    </div>
+ <% } %>
+  <div class="product_container">
+    <% for(var i=0; i<Products.length; i++) { %>
+      <div class="product">
+        <img src="<%= Products[i].image %>" alt="<%= Products[i].name %>">
+        <h2><%= Products[i].name %></h2>
+        <p class="owner">By <%= Products[i].owner.username %></p>
+        <a href="/show/<%= Products[i]._id %>" class="product-button">View Detail</a>
+      </div>
+    <% } %> 
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 ShopEase. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

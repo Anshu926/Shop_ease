@@ -1,0 +1,47 @@
+/* Universal.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: black;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Large Background Text */
+  .background-text {
+    font-size: 6rem;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.1); /* Light gray for subtle contrast */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 2s ease-in-out, textShadowPulse 2s infinite;
+    z-index: 1;
+  }  
+  /* Bouncing Animation for Emoji */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+ 
+  
+  /* Fade-In Animation for Background Text */
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+
+  
