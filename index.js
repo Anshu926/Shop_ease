@@ -30,7 +30,7 @@ app.use(
     resave: false,
     saveUninitialized: false, // Avoid creating sessions for unauthenticated users
     store: MongoStore.create({
-      mongoUrl: 'mongodb://localhost:27017/Trust', // Replace with your DB URL
+      mongoUrl: 'mongodb+srv://shop_ease_user:2005@cluster0.6hhoa.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0', // Replace with your DB URL
       collectionName: 'sessions',
     }),
     cookie: {
